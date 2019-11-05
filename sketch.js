@@ -1,190 +1,276 @@
-//oscillators
-	let osc
-	let osc2
-//envelopes
-	let env
-	let env2
-//noises
-	let noise
-	let noise_env
-	let noise2
-	let noise_env2
-//images
-	let pio 
+let osc;
+let playing = false;
+let mySound0
+let mySound1
+let mySound2
+let mySound3
+let mySound4
+let mySound5
+let mySound6
+let mySound7
+let backgroundColor
 
-//other setup variables
-let frequency = 50
+//let gravity = 5
+//let point1 = createVector(width-500,height-1000)
 
-let circle_radius = 0
-let circle_x = 0
-let circle_y = 0
+function preload() {
+  soundFormats('mp3', 'ogg');
+  mySound0 = loadSound('snare_drum.mp3');
+  mySound1 = loadSound('what_drums.mp3');
+  mySound2 = loadSound('why_drums.mp3');
+  mySound3 = loadSound('freakin_drums.mp3');
+  mySound4 = loadSound('Nah_drums.mp3');
+  mySound5 = loadSound('Bruh_2_drums.mp3');
+  mySound6 = loadSound('a_drums.mp3');
+  mySound7 = loadSound('heck_drums.mp3');
 
-function preload()
-	pio = loadImage('pio.jpg')
-	image(pio, mouseX, mouseY)
+
+}
 
 function setup() {
-
-    let canvas = createCanvas(windowWidth, windowHeight)
-    canvas.parent("p5")
-
-    // create new oscillator 
-    osc = new p5.Oscillator()
-    osc.setType("square") // "sine" "square" "sawtooth"
-    osc.amp(0)  // set initial amplitude to 0
-
-
-    // create new oscillator
-    osc2 = new p5.Oscillator()
-    osc2.setType("sawtooth")
-    osc2.amp(0)
-
-    // create new envelope
-    env = new p5.Envelope()
-    env.setADSR(0.2, 0.1, 0.1, 0.5)
-
-	// create new envelope 2
-    env2 = new p5.Envelope()
-    env2.setADSR(0.2, 0.1, 0.1, 0.5)
-
-    // create new noise maker
-    noise = new p5.Noise()
-    noise.setType("white") // "brown" "pink" "tyoe of noise"
-    noise.amp(0)  // set initial amplitude to 0
-
-    noise_env = new p5.Envelope()
-    noise_env.setADSR(0.01, 0.1, 0, 0)
-
+  createCanvas(windowWidth,windowHeight)
+  backgroundColor = color(0, 150,255);
+  textAlign(CENTER);
+  //mySound.setVolume(0.1);
+  //mySound.play();
+  angleMode(DEGREES)
 }
 
 
 function draw() {
+  background(backgroundColor)
+  push()
+  textSize(30)
+  text('+', width/2, height/2);
+  pop()
+  push()
+  textSize(100)
+  text('The Wordstument', width/2, height/2 - 1000)
+  pop()
 
-    noStroke()
 
-    // map the red value of our background fill to the frequency variable
-    fill( map(frequency, 50, 2000, 0, 255) , 0, 0)
-    rect(0, 0, width, height)
-
-    // make a circle
-    fill(255, 255, 0)
-    ellipse(circle_x, circle_y, circle_radius, circle_radius)
-    if (circle_radius > 0 && mouseIsPressed == false) {
-        circle_radius -= 5
-    }
-
-    // button that toggles with osc type
+//Left Symbol
     push()
-    noStroke()
-    if (osc.getType() == 'sine') {
-        fill(0, 255, 0)
-    } else {
-        fill(0, 0, 255)
-    }
-    rect(10, 10, 30, 30)
+    stroke(0)
+    strokeWeight(5)
+      push()
+      strokeWeight(10)
+      line(width/2-1100, height-2100, width/2-1100, height-1900)
+      line(width/2-1100, height-2000, width/2-1300, height-1800)
+      line(width/2-1300, height-1900, width/2-1300, height-800)
+
+      pop()
+     
+      push()
+      //rotate(30)
+      ellipse(width/2-1100, height-2100, 400, 100)
+      arc(width/2-1100, height-2100, 35, 25, 180, 360)
+      //attempt at rotating with arc
+      //arc(width-2500, height-1100, 400, 100, 270, 180)
+
+      pop()
     pop()
 
 
-    // 2nd osc Button
+//Drum 1
+  push()
+    strokeWeight(5)
+    rect(width/2-800, height-1900, 400, 300)
+  pop()
+
     push()
-	noStroke()
-	if (osc.getType() == 'sawtooth') {
-		fill(255, 0, 0)
-	}else {
-		fill(123, 123, 3)
-	}
-	rect(10, 50, 30, 30)
-	pop()
+      stroke(0)
+      strokeWeight(7)
+      ellipse(width/2-600, height-1900, 400, 100)
+      arc(width/2-600, height-1600, 400, 100, 360, 180)
+    pop()
+
+    push()
+      stroke(255)
+      strokeWeight(3)
+      line(width/2-800, height-1600, width/2-400, height- 1600)
+    pop()
+
+
+//Drum 2
+    //body of drum
+    push()
+      noStroke()
+      rect(width/2-350, height-2000, 300, 300)
+    pop()
+
+    //sides of drum
+    push()
+      strokeWeight(5)
+      line(width/2-350, height-2000, width/2-350, height-1700)
+      line(width/2-50, height-2000, width/2-50, height-1700)
+    pop() 
+
+    //top and bottom of drum
+    push()
+      strokeWeight(5)
+      arc(width/2-200, height-2000, 300, 100, 180, 360)
+      arc(width/2-200, height-2000, 300, 100, 360, 180)
+      arc(width/2-200, height-1700, 300, 100, 360, 180)
+    pop()
 
 
 
-}
-function windowResized() {    
-    resizeCanvas(windowWidth, windowHeight)
-}
+//Drum 3
+    //body of drum
+    push()
+      noStroke()
+      rect(width/2+350, height-1800, 300, 200)
+    pop()
+
+    //top of drum
+    push()
+      strokeWeight(5)
+      ellipse(width/2+500, height-1800, 300, 100)
+    pop()
+
+    //bottom of drum
+    push()
+      strokeWeight(5)
+      arc(width/2 +500, height-1600, 300, 100, 360, 180)
+    pop()
 
 
-function mousePressed() {
+//Chonk Drum
+    push()
+      strokeWeight(7)
+      //outside ring
+      ellipse(width/2 , height-1300, 800, 800)
+      //inside ring
+      ellipse(width/2, height-1300, 750, 750)
+      textSize(300)
+      text('R', width / 2, height-1200)
+    pop()
 
-    // trigger the osc envelope
-    osc.start()
-    osc.amp(env)
-    env.triggerAttack()
+//Right Symbol 
+    push()
+      strokeWeight(5)
+      ellipse(width/2+1100, height-2200, 400, 150)
+      arc(width/2+1100, height -2200, 35, 25, 180, 360)
 
-    // trigger the noise envelope
-    noise.start()
-    noise.amp(noise_env)
-    noise_env.triggerAttack()
+    pop()
+  
 
-    // set the circle to the mouse position and increase its radius
-    circle_radius = 100
-    circle_x = mouseX
-    circle_y = mouseY
+//Symbol Short
+    push()
+    strokeWeight(4)
+      push()
+      strokeWeight(10)
+      line(width/2+1000, height-1800, width/2 +1000, height-1400)
+      pop()
+    fill(0)
+    rect(width/2 + 990, height-1600, 20, 20)
+    pop() 
 
-    mouseDragged()
-}
+    push()
+    stroke(0)
+    strokeWeight(5)
+    ellipse(width/2 +1000, height-1800, 300, 100) //x,y,w,h
+    arc(width/2 +1000, height- 1800, 35, 25, 180, 360)
+    pop()
 
-function mouseReleased() {
 
-    // "release" the envelopes
-    env.triggerRelease()
-    noise_env.triggerRelease()
-	//#2   
-    env2.triggerRelease()
-    noise_env2.triggerRelease()
-    //#3
-    env3.triggerRelease()
-    noise_env3.triggerRelease()
-}
+    //line to stand & drum 6
+    push()
+      
+          push()
+          strokeWeight(10)
+          line(width/2 +1000, height-1600, width/2 +1200, height-1500)
+          fill(0)
+          rect(width/2 +1200, height-1500, 25, 25)
+          pop()
+          //line from right symbol 
+          push()
+          strokeWeight(10)
+          line(width/2 +1100, height-2200, width/2+ 1400, height-2000)
+          line(width/2 +1200, height-2150, width/2 +1200, height-1500)
+          line(width/2 +1200, height-1500, width/2 +1200, height-1000)
 
-function mouseDragged() {
+          //Stand Legs Right Symbols
+          line(width/2 +1200, height-1000, width/2 +800, height-500)
+          pop()
+          //move these lines upward so they dont stick out ^^^
+    pop()
 
-    // map the mouse position to a frequency variable
-    frequency = map(mouseY, 0, height, 2000, 50)
-    osc.freq(frequency) // set the osc to this frequency
+          //Bottom of floor
+          push()
+          strokeWeight(30)
+          line(0, height-900, windowWidth, height-900 )
 
-    // track the mouse position with circle variables
-    circle_x = mouseX
-    circle_y = mouseY
-
-    // map pan to mouseX
-    let pan = map(mouseX, 0, width, -1, 1)
-    osc.pan(pan)
+          pop()
 
 }
 
 function mouseClicked() {
 
-    // test if we clicked in a button 
-    if (mouseX > 10 && mouseX < 40 && mouseY > 10 && mouseY < 40) {
+
+  print(int(mouseX), int(mouseY))
+
+      // test if we clicked in a drum 
+    //if (mouseX > ____ && mouseX < ____ && mouseY > ____ && mouseY < ____) {
+      //  playing=true } else { 
+        //playing= false
+      
         print('button clicked')
-        if (osc.getType() == 'square') {
-            osc.setType('sine')
-        } else {
-            osc.setType('square')
-        }
-    }
+        //mySound.play();
+  
+
+      //Left Symbol
+      if (mouseX > width/2-1300 && mouseX < width/2- 900 && mouseY < height-2050 && mouseY > height-2150) {
+        print('Left Symbol')
+        mySound1.play();
+        //ellipse(width/2-1100, height-2100, 400, 100
+      }
+
+      //Drum 1 Sound
+      if (mouseX > width/2-1000 && mouseX < width/2-400 && mouseY < 1465 && mouseY > 1060) {
+        print('Drum 1')
+        mySound2.play();
+      }
+        // rect(width/2-800, height-1900, 400, 300)
+
+      //Drum 2 Sound //left bound && right bound
+      if (mouseX > width/2-400 && mouseX < width/2-50 && mouseY > 965 && mouseY < 1365) {
+        print('Drum 2')
+        mySound3.play();
+      }
 
 
 
-    //test if 2nd button is clicked
-    if (mouseX > 10 && mouseX < 40 && mouseY > 50 && mouseY < 80) {
-    	print('button 2 clicked')
-    	if (osc2.getType() == 'sawtooth') {
-    		osc2.setType('sawtooth')
-    	} else {
-    		osc2.setType('sawtooth')
-   		}
-   	}
+      //Chonky Drum Sound
+      if (mouseX > width/2 -400 && mouseX < width/2 +400  && mouseY > height/2-400 && mouseY < height/2+600 ) {
+        print('Chonky Drum')
+        mySound4.play();
+      //ellipse(width/2 , height-1300, 800, 800)
+      }
 
-}
 
-// add these to make it work for touch screens
-function touchStarted() {
-    mousePressed()   
-    mouseClicked()
-}
+      //Drum 3 Sound
+      if (mouseX > width/2 +50 && mouseX < width/2 +650 && mouseY > 1170 && mouseY < 1468 ) {
+        print('Drum 3')
+        mySound5.play();
+     
+      }
+      //Small Symbol
+      if (mouseX > width/2 +700 && mouseX < width/2 +1300 && mouseY > 1160 && mouseY < 1260) {
+        print('Drum 4')
+        mySound6.play();
 
-function touchEnded() {
-    mouseReleased()   
+        //ellipse(width/2 +1000, height-1800, 300, 100)
+      }
+
+      //Right Symbol
+      if (mouseX > width/2 +700 && mouseX < width/2 +1300 && mouseY > 740 && mouseY < 885) {
+        print('Drum 5')
+        mySound7.play();
+
+      }
+
+      //ellipse(width/2+1100, height-2200, 400, 150)
+
 }
